@@ -3,14 +3,15 @@
         掲示板!
     </h1>
 </div>
-<form #myForm="ngForm" (ngSubmit)="add()" novalidate>
+<form (submit)="addComment($event, message)">
     <div>
         <label for="input_name">名前</label><br />
         <input id="input_name" name="input_name" type="text" [(ngModel)]="name" #input_name="ngModel" />
     </div>
     <div>
         <label for="input_message">メッセージ</label><br />
-        <textarea id="input_message" name="input_message" cols="30" rows="5" maxlength="100" [(ngModel)]="message" #input_message="ngModel"></textarea>
+        <textarea id="input_message" name="input_message" cols="30" rows="5" maxlength="100" [(ngModel)]="message"
+            #input_message="ngModel"></textarea>
     </div>
     <input type="submit" value="送信" />
 </form>

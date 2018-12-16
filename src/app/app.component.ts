@@ -17,19 +17,12 @@ export class AppComponent {
 
   item: Observable<Comment>;
 
-  constructor(db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
     this.item = db.collection('contents').doc<Comment>('item').valueChanges();
   }
 
   contents: Comment[] = [
-    {
-      name: 'nannany',
-      message: 'wwwwww'
-    },
-    {
-      name: 'stkysk',
-      message: '草'
-    }
+    new Comment('nannany', 'wwwwww')
   ];
 
   selector() {
@@ -37,6 +30,13 @@ export class AppComponent {
   }
 
   add() {
-    this.contents.push({ name: this.name, message: this.message });
+    this.contents.push(new Comment(this.name, this.message));
+  }
+
+  addComment(e: Event, message: string) {
+    if (message) {
+      this.db.collection('contents').add(new Comment(this.name, message).deserialize());
+      this.message = '';
+    }
   }
 }
