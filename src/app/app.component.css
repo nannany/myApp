@@ -1,0 +1,13 @@
+.contents {
+    max-width: 960px;
+    background-color: white;
+}
+
+.name {
+    color: blue;
+    font: bold;
+}
+
+.comment {
+    background-color: #F0E0F0;
+}

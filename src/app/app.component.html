@@ -3,14 +3,24 @@
         掲示板!
     </h1>
 </div>
-<ul>
-    <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-    </li>
-    <li>
-        <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-    </li>
-    <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-    </li>
-</ul>
+<form #myForm="ngForm" (ngSubmit)="add()" novalidate>
+    <div>
+        <label for="input_name">名前</label><br />
+        <input id="input_name" name="input_name" type="text" [(ngModel)]="name" #input_name="ngModel" />
+    </div>
+    <div>
+        <label for="input_message">メッセージ</label><br />
+        <textarea id="input_message" name="input_message" cols="30" rows="5" maxlength="100" [(ngModel)]="message" #input_message="ngModel"></textarea>
+    </div>
+    <input type="submit" value="送信" />
+</form>
+<ng-container *ngFor="let comment of contents">
+    <div class="contents">
+        <div class="name">
+            {{comment.name}}
+        </div>
+        <div class="comment">
+            {{comment.message}}
+        </div>
+    </div>
+</ng-container>
