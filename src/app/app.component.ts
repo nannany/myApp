@@ -15,6 +15,12 @@ export class AppComponent {
   name = '???'
   message = '';
 
+  item: Observable<Comment>;
+
+  constructor(db: AngularFirestore) {
+    this.item = db.collection('contents').doc<Comment>('item').valueChanges();
+  }
+
   contents: Comment[] = [
     {
       name: 'nannany',
