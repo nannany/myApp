@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Comment } from './class/comment';
+
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MyApp';
+  title = '掲示板';
+  count = 0;
+  name = '???'
+  message = '';
+
+  contents: Comment[] = [
+    {
+      name: 'nannany',
+      message: 'wwwwww'
+    },
+    {
+      name: 'stkysk',
+      message: '草'
+    }
+  ];
+
+  selector() {
+    this.count = this.message.length;
+  }
+
+  add() {
+    this.contents.push({ name: this.name, message: this.message });
+  }
 }
