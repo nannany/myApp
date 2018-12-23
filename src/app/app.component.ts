@@ -3,6 +3,7 @@ import { Comment } from './class/comment';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,20 @@ export class AppComponent {
   name = '???'
   message = '';
 
-  item: Observable<Comment>;
+  comments: Observable<Comment[]>;
 
   constructor(private db: AngularFirestore) {
-    this.item = db.collection('contents').doc<Comment>('item').valueChanges();
+    this.comments = db.collection<Comment>('contents', ref => {
+      return ref.orderBy('date', 'asc')
+    })
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(action => {
+          const data = action.payload.doc.data() as Comment;
+          const comment_data = new Comment(data.name, data.message);
+          comment_data.setDate(data.date);
+          return comment_data;
+        })));
   }
 
   contents: Comment[] = [
@@ -34,8 +45,11 @@ export class AppComponent {
   }
 
   addComment(e: Event, message: string) {
+    e.preventDefault();
     if (message) {
-      this.db.collection('contents').add(new Comment(this.name, message).deserialize());
+      this.db
+      .collection('contents')
+      .add(new Comment(this.name, message).deserialize());
       this.message = '';
     }
   }

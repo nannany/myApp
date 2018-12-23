@@ -15,21 +15,13 @@
     </div>
     <input type="submit" value="送信" />
 </form>
-<ng-container *ngFor="let comment of contents">
+<ng-container *ngFor="let comment of comments | async">
     <div class="contents">
         <div class="name">
-            {{comment.name}}
+            {{comment.name}} 日時:{{comment.date | date:'medium'}}
         </div>
         <div class="comment">
             {{comment.message}}
         </div>
     </div>
 </ng-container>
-<div>
-    <div>
-        {{(item | async)?.name}}
-    </div>
-    <div>
-        {{(item | async)?.message}}
-    </div>
-</div>
