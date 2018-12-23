@@ -15,13 +15,15 @@
     </div>
     <input type="submit" value="送信" />
 </form>
-<ng-container *ngFor="let comment of comments | async">
+<ng-container *ngFor="let comment of comments | async | slice: start: start+len">
     <div class="contents">
         <div class="name">
             {{comment.name}} 日時:{{comment.date | date:'medium'}}
         </div>
-        <div class="comment">
-            {{comment.message}}
+        <div class="comment" [innerHTML]="comment.message | nl2br">
         </div>
     </div>
 </ng-container>
+<div>
+    <pagination [totalItems]="100" [(ngModel)]="currentPage" (pageChanged)="pager($event)"></pagination>
+</div>

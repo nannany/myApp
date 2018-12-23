@@ -15,7 +15,9 @@ export class AppComponent {
   count = 0;
   name = '???'
   message = '';
-
+  start = 0;
+  len = 10;
+  currentPage = 1;
   comments: Observable<Comment[]>;
 
   constructor(private db: AngularFirestore) {
@@ -32,25 +34,21 @@ export class AppComponent {
         })));
   }
 
-  contents: Comment[] = [
-    new Comment('nannany', 'wwwwww')
-  ];
-
   selector() {
     this.count = this.message.length;
-  }
-
-  add() {
-    this.contents.push(new Comment(this.name, this.message));
   }
 
   addComment(e: Event, message: string) {
     e.preventDefault();
     if (message) {
       this.db
-      .collection('contents')
-      .add(new Comment(this.name, message).deserialize());
+        .collection('contents')
+        .add(new Comment(this.name, message).deserialize());
       this.message = '';
     }
+  }
+
+  pager(event: any): void {
+    this.start = this.len * (event.page - 1);
   }
 }

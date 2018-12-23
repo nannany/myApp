@@ -8,9 +8,13 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Nl2brPipe } from './nl2br.pipe';
+import {PaginationModule} from 'ngx-bootstrap';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Nl2brPipe
   ],
   imports: [
     BrowserModule,
@@ -19,6 +23,7 @@ import { AppComponent } from './app.component';
     AngularFireModule.initializeApp(environment.firebase), 
     AngularFirestoreModule,  
     AngularFireAuthModule,  
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
