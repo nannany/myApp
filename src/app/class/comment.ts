@@ -20,4 +20,19 @@ export class Comment {
         this.date = date;
         return this;
     }
+
+}
+
+export class Session {
+    login: boolean;
+
+    constructor() {
+        this.login = false;
+    }
+
+    reset(): Session { // 追加
+        this.login = false;
+        return this;
+    }
+
 }
