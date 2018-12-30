@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
+  { path: 'account', loadChildren: './account/account.module#AccountModule' },
   { path: '', component: ChatComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
