@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { PaginationModule } from 'ngx-bootstrap';
 import { ChatComponent } from './chat/chat.component';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SharedModule } from './shared/shared.module';
     AngularFirestoreModule,  
     AngularFireAuthModule,  
     PaginationModule.forRoot(),
-    SharedModule
+    SharedModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
